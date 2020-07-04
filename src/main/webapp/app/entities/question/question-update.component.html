@@ -36,9 +36,9 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="formsApp.question.survey" for="field_survey">Survey</label>
-                    <select class="form-control" id="field_survey" name="survey" formControlName="survey">
+                    <select class="form-control" id="field_survey" name="survey" formControlName="surveyId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="surveyOption.id === editForm.get('survey')!.value?.id ? editForm.get('survey')!.value : surveyOption" *ngFor="let surveyOption of surveys; trackBy: trackById">{{ surveyOption.id }}</option>
+                        <option [ngValue]="surveyOption.id" *ngFor="let surveyOption of surveys; trackBy: trackById">{{ surveyOption.id }}</option>
                     </select>
                 </div>
             </div>

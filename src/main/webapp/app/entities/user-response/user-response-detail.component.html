@@ -22,14 +22,14 @@
                 </dd>
                 <dt><span jhiTranslate="formsApp.userResponse.survey">Survey</span></dt>
                 <dd>
-                    <div *ngIf="userResponse.survey">
-                        <a [routerLink]="['/survey', userResponse.survey?.id, 'view']">{{ userResponse.survey?.id }}</a>
+                    <div *ngIf="userResponse.surveyId">
+                        <a [routerLink]="['/survey', userResponse.surveyId, 'view']">{{ userResponse.surveyId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="formsApp.userResponse.question">Question</span></dt>
                 <dd>
-                    <div *ngIf="userResponse.question">
-                        <a [routerLink]="['/question', userResponse.question?.id, 'view']">{{ userResponse.question?.id }}</a>
+                    <div *ngIf="userResponse.questionId">
+                        <a [routerLink]="['/question', userResponse.questionId, 'view']">{{ userResponse.questionId }}</a>
                     </div>
                 </dd>
             </dl>

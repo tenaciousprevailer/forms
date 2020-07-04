@@ -21,30 +21,30 @@
     <div class="table-responsive" id="entities" *ngIf="userResponses && userResponses.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.dateCreated">Date Created</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.takenBy">Taken By</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.responseData">Response Data</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.survey">Survey</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.question">Question</span></th>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateCreated"><span jhiTranslate="formsApp.userResponse.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="takenBy"><span jhiTranslate="formsApp.userResponse.takenBy">Taken By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="responseData"><span jhiTranslate="formsApp.userResponse.responseData">Response Data</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="surveyId"><span jhiTranslate="formsApp.userResponse.survey">Survey</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="questionId"><span jhiTranslate="formsApp.userResponse.question">Question</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let userResponse of userResponses ;trackBy: trackId">
                     <td><a [routerLink]="['/user-response', userResponse.id, 'view']">{{ userResponse.id }}</a></td>
                     <td>{{ userResponse.dateCreated | date:'medium' }}</td>
                     <td>{{ userResponse.takenBy }}</td>
                     <td>{{ userResponse.responseData }}</td>
                     <td>
-                        <div *ngIf="userResponse.survey">
-                            <a [routerLink]="['/survey', userResponse.survey?.id, 'view']" >{{ userResponse.survey?.id }}</a>
+                        <div *ngIf="userResponse.surveyId">
+                            <a [routerLink]="['/survey', userResponse.surveyId , 'view']" >{{ userResponse.surveyId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="userResponse.question">
-                            <a [routerLink]="['/question', userResponse.question?.id, 'view']" >{{ userResponse.question?.id }}</a>
+                        <div *ngIf="userResponse.questionId">
+                            <a [routerLink]="['/question', userResponse.questionId , 'view']" >{{ userResponse.questionId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

@@ -1,14 +1,12 @@
 import { Moment } from 'moment';
-import { ISurvey } from 'app/shared/model/survey.model';
-import { IQuestion } from 'app/shared/model/question.model';
 
 export interface IUserResponse {
   id?: number;
   dateCreated?: Moment;
   takenBy?: string;
   responseData?: string;
-  survey?: ISurvey;
-  question?: IQuestion;
+  surveyId?: number;
+  questionId?: number;
 }
 
 export class UserResponse implements IUserResponse {
@@ -17,7 +15,7 @@ export class UserResponse implements IUserResponse {
     public dateCreated?: Moment,
     public takenBy?: string,
     public responseData?: string,
-    public survey?: ISurvey,
-    public question?: IQuestion
+    public surveyId?: number,
+    public questionId?: number
   ) {}
 }

@@ -3,6 +3,9 @@ package com.tenacious.forms.web.rest;
 import com.tenacious.forms.FormsApp;
 import com.tenacious.forms.domain.UserResponse;
 import com.tenacious.forms.repository.UserResponseRepository;
+import com.tenacious.forms.service.UserResponseService;
+import com.tenacious.forms.service.dto.UserResponseDTO;
+import com.tenacious.forms.service.mapper.UserResponseMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,12 @@ public class UserResponseResourceIT {
 
     @Autowired
     private UserResponseRepository userResponseRepository;
+
+    @Autowired
+    private UserResponseMapper userResponseMapper;
+
+    @Autowired
+    private UserResponseService userResponseService;
 
     @Autowired
     private EntityManager em;
@@ -88,9 +97,10 @@ public class UserResponseResourceIT {
     public void createUserResponse() throws Exception {
         int databaseSizeBeforeCreate = userResponseRepository.findAll().size();
         // Create the UserResponse
+        UserResponseDTO userResponseDTO = userResponseMapper.toDto(userResponse);
         restUserResponseMockMvc.perform(post("/api/user-responses")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userResponse)))
+            .content(TestUtil.convertObjectToJsonBytes(userResponseDTO)))
             .andExpect(status().isCreated());
 
         // Validate the UserResponse in the database
@@ -109,11 +119,12 @@ public class UserResponseResourceIT {
 
         // Create the UserResponse with an existing ID
         userResponse.setId(1L);
+        UserResponseDTO userResponseDTO = userResponseMapper.toDto(userResponse);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restUserResponseMockMvc.perform(post("/api/user-responses")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userResponse)))
+            .content(TestUtil.convertObjectToJsonBytes(userResponseDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the UserResponse in the database
@@ -177,10 +188,11 @@ public class UserResponseResourceIT {
             .dateCreated(UPDATED_DATE_CREATED)
             .takenBy(UPDATED_TAKEN_BY)
             .responseData(UPDATED_RESPONSE_DATA);
+        UserResponseDTO userResponseDTO = userResponseMapper.toDto(updatedUserResponse);
 
         restUserResponseMockMvc.perform(put("/api/user-responses")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedUserResponse)))
+            .content(TestUtil.convertObjectToJsonBytes(userResponseDTO)))
             .andExpect(status().isOk());
 
         // Validate the UserResponse in the database
@@ -197,10 +209,13 @@ public class UserResponseResourceIT {
     public void updateNonExistingUserResponse() throws Exception {
         int databaseSizeBeforeUpdate = userResponseRepository.findAll().size();
 
+        // Create the UserResponse
+        UserResponseDTO userResponseDTO = userResponseMapper.toDto(userResponse);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUserResponseMockMvc.perform(put("/api/user-responses")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userResponse)))
+            .content(TestUtil.convertObjectToJsonBytes(userResponseDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the UserResponse in the database

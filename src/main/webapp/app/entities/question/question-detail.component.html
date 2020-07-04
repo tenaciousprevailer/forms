@@ -22,8 +22,8 @@
                 </dd>
                 <dt><span jhiTranslate="formsApp.question.survey">Survey</span></dt>
                 <dd>
-                    <div *ngIf="question.survey">
-                        <a [routerLink]="['/survey', question.survey?.id, 'view']">{{ question.survey?.id }}</a>
+                    <div *ngIf="question.surveyId">
+                        <a [routerLink]="['/survey', question.surveyId, 'view']">{{ question.surveyId }}</a>
                     </div>
                 </dd>
             </dl>

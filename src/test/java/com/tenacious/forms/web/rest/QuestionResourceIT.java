@@ -3,6 +3,9 @@ package com.tenacious.forms.web.rest;
 import com.tenacious.forms.FormsApp;
 import com.tenacious.forms.domain.Question;
 import com.tenacious.forms.repository.QuestionRepository;
+import com.tenacious.forms.service.QuestionService;
+import com.tenacious.forms.service.dto.QuestionDTO;
+import com.tenacious.forms.service.mapper.QuestionMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,6 +44,12 @@ public class QuestionResourceIT {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionService questionService;
 
     @Autowired
     private EntityManager em;
@@ -87,9 +96,10 @@ public class QuestionResourceIT {
     public void createQuestion() throws Exception {
         int databaseSizeBeforeCreate = questionRepository.findAll().size();
         // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Question in the database
@@ -108,11 +118,12 @@ public class QuestionResourceIT {
 
         // Create the Question with an existing ID
         question.setId(1L);
+        QuestionDTO questionDTO = questionMapper.toDto(question);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database
@@ -176,10 +187,11 @@ public class QuestionResourceIT {
             .text(UPDATED_TEXT)
             .type(UPDATED_TYPE)
             .jsonData(UPDATED_JSON_DATA);
+        QuestionDTO questionDTO = questionMapper.toDto(updatedQuestion);
 
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedQuestion)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isOk());
 
         // Validate the Question in the database
@@ -196,10 +208,13 @@ public class QuestionResourceIT {
     public void updateNonExistingQuestion() throws Exception {
         int databaseSizeBeforeUpdate = questionRepository.findAll().size();
 
+        // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database

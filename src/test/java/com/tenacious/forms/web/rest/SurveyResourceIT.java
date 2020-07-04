@@ -3,6 +3,9 @@ package com.tenacious.forms.web.rest;
 import com.tenacious.forms.FormsApp;
 import com.tenacious.forms.domain.Survey;
 import com.tenacious.forms.repository.SurveyRepository;
+import com.tenacious.forms.service.SurveyService;
+import com.tenacious.forms.service.dto.SurveyDTO;
+import com.tenacious.forms.service.mapper.SurveyMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,6 +66,12 @@ public class SurveyResourceIT {
     private SurveyRepository surveyRepository;
 
     @Autowired
+    private SurveyMapper surveyMapper;
+
+    @Autowired
+    private SurveyService surveyService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -119,9 +128,10 @@ public class SurveyResourceIT {
     public void createSurvey() throws Exception {
         int databaseSizeBeforeCreate = surveyRepository.findAll().size();
         // Create the Survey
+        SurveyDTO surveyDTO = surveyMapper.toDto(survey);
         restSurveyMockMvc.perform(post("/api/surveys")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(survey)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Survey in the database
@@ -146,11 +156,12 @@ public class SurveyResourceIT {
 
         // Create the Survey with an existing ID
         survey.setId(1L);
+        SurveyDTO surveyDTO = surveyMapper.toDto(survey);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restSurveyMockMvc.perform(post("/api/surveys")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(survey)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Survey in the database
@@ -232,10 +243,11 @@ public class SurveyResourceIT {
             .createdBy(UPDATED_CREATED_BY)
             .lastUpdatedBy(UPDATED_LAST_UPDATED_BY)
             .status(UPDATED_STATUS);
+        SurveyDTO surveyDTO = surveyMapper.toDto(updatedSurvey);
 
         restSurveyMockMvc.perform(put("/api/surveys")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedSurvey)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyDTO)))
             .andExpect(status().isOk());
 
         // Validate the Survey in the database
@@ -258,10 +270,13 @@ public class SurveyResourceIT {
     public void updateNonExistingSurvey() throws Exception {
         int databaseSizeBeforeUpdate = surveyRepository.findAll().size();
 
+        // Create the Survey
+        SurveyDTO surveyDTO = surveyMapper.toDto(survey);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSurveyMockMvc.perform(put("/api/surveys")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(survey)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Survey in the database

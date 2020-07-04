@@ -30,8 +30,8 @@ export class UserResponseUpdateComponent implements OnInit {
     dateCreated: [],
     takenBy: [],
     responseData: [],
-    survey: [],
-    question: [],
+    surveyId: [],
+    questionId: [],
   });
 
   constructor(
@@ -63,8 +63,8 @@ export class UserResponseUpdateComponent implements OnInit {
       dateCreated: userResponse.dateCreated ? userResponse.dateCreated.format(DATE_TIME_FORMAT) : null,
       takenBy: userResponse.takenBy,
       responseData: userResponse.responseData,
-      survey: userResponse.survey,
-      question: userResponse.question,
+      surveyId: userResponse.surveyId,
+      questionId: userResponse.questionId,
     });
   }
 
@@ -91,8 +91,8 @@ export class UserResponseUpdateComponent implements OnInit {
         : undefined,
       takenBy: this.editForm.get(['takenBy'])!.value,
       responseData: this.editForm.get(['responseData'])!.value,
-      survey: this.editForm.get(['survey'])!.value,
-      question: this.editForm.get(['question'])!.value,
+      surveyId: this.editForm.get(['surveyId'])!.value,
+      questionId: this.editForm.get(['questionId'])!.value,
     };
   }
 

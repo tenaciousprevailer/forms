@@ -1,6 +1,4 @@
 import { Moment } from 'moment';
-import { ISurveyConfiguration } from 'app/shared/model/survey-configuration.model';
-import { ISurveyStats } from 'app/shared/model/survey-stats.model';
 import { IQuestion } from 'app/shared/model/question.model';
 import { IUserResponse } from 'app/shared/model/user-response.model';
 import { SurveyStatus } from 'app/shared/model/enumerations/survey-status.model';
@@ -16,8 +14,8 @@ export interface ISurvey {
   createdBy?: string;
   lastUpdatedBy?: string;
   status?: SurveyStatus;
-  surveyConfiguration?: ISurveyConfiguration;
-  surveyStats?: ISurveyStats;
+  surveyConfigurationId?: number;
+  surveyStatsId?: number;
   questions?: IQuestion[];
   userResponses?: IUserResponse[];
 }
@@ -34,8 +32,8 @@ export class Survey implements ISurvey {
     public createdBy?: string,
     public lastUpdatedBy?: string,
     public status?: SurveyStatus,
-    public surveyConfiguration?: ISurveyConfiguration,
-    public surveyStats?: ISurveyStats,
+    public surveyConfigurationId?: number,
+    public surveyStatsId?: number,
     public questions?: IQuestion[],
     public userResponses?: IUserResponse[]
   ) {}

@@ -21,23 +21,23 @@
     <div class="table-responsive" id="entities" *ngIf="surveys && surveys.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.description">Description</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.dateStart">Date Start</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.dateEnd">Date End</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.dateCreated">Date Created</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.dateLastUpdated">Date Last Updated</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.lastUpdatedBy">Last Updated By</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.status">Status</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.surveyConfiguration">Survey Configuration</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.survey.surveyStats">Survey Stats</span></th>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="formsApp.survey.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="formsApp.survey.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateStart"><span jhiTranslate="formsApp.survey.dateStart">Date Start</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateEnd"><span jhiTranslate="formsApp.survey.dateEnd">Date End</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateCreated"><span jhiTranslate="formsApp.survey.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateLastUpdated"><span jhiTranslate="formsApp.survey.dateLastUpdated">Date Last Updated</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="formsApp.survey.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastUpdatedBy"><span jhiTranslate="formsApp.survey.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="formsApp.survey.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="surveyConfigurationId"><span jhiTranslate="formsApp.survey.surveyConfiguration">Survey Configuration</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="surveyStatsId"><span jhiTranslate="formsApp.survey.surveyStats">Survey Stats</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let survey of surveys ;trackBy: trackId">
                     <td><a [routerLink]="['/survey', survey.id, 'view']">{{ survey.id }}</a></td>
                     <td>{{ survey.name }}</td>
@@ -50,13 +50,13 @@
                     <td>{{ survey.lastUpdatedBy }}</td>
                     <td jhiTranslate="{{ 'formsApp.SurveyStatus.' + survey.status }}">{{ survey.status }}</td>
                     <td>
-                        <div *ngIf="survey.surveyConfiguration">
-                            <a [routerLink]="['/survey-configuration', survey.surveyConfiguration?.id, 'view']" >{{ survey.surveyConfiguration?.id }}</a>
+                        <div *ngIf="survey.surveyConfigurationId">
+                            <a [routerLink]="['/survey-configuration', survey.surveyConfigurationId , 'view']" >{{ survey.surveyConfigurationId }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="survey.surveyStats">
-                            <a [routerLink]="['/survey-stats', survey.surveyStats?.id, 'view']" >{{ survey.surveyStats?.id }}</a>
+                        <div *ngIf="survey.surveyStatsId">
+                            <a [routerLink]="['/survey-stats', survey.surveyStatsId , 'view']" >{{ survey.surveyStatsId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

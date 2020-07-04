@@ -74,17 +74,17 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="formsApp.survey.surveyConfiguration" for="field_surveyConfiguration">Survey Configuration</label>
-                    <select class="form-control" id="field_surveyConfiguration" name="surveyConfiguration" formControlName="surveyConfiguration">
+                    <select class="form-control" id="field_surveyConfiguration" name="surveyConfiguration" formControlName="surveyConfigurationId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="surveyConfigurationOption.id === editForm.get('surveyConfiguration')!.value?.id ? editForm.get('surveyConfiguration')!.value : surveyConfigurationOption" *ngFor="let surveyConfigurationOption of surveyconfigurations; trackBy: trackById">{{ surveyConfigurationOption.id }}</option>
+                        <option [ngValue]="surveyConfigurationOption.id" *ngFor="let surveyConfigurationOption of surveyconfigurations; trackBy: trackById">{{ surveyConfigurationOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="formsApp.survey.surveyStats" for="field_surveyStats">Survey Stats</label>
-                    <select class="form-control" id="field_surveyStats" name="surveyStats" formControlName="surveyStats">
+                    <select class="form-control" id="field_surveyStats" name="surveyStats" formControlName="surveyStatsId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="surveyStatsOption.id === editForm.get('surveyStats')!.value?.id ? editForm.get('surveyStats')!.value : surveyStatsOption" *ngFor="let surveyStatsOption of surveystats; trackBy: trackById">{{ surveyStatsOption.id }}</option>
+                        <option [ngValue]="surveyStatsOption.id" *ngFor="let surveyStatsOption of surveystats; trackBy: trackById">{{ surveyStatsOption.id }}</option>
                     </select>
                 </div>
             </div>

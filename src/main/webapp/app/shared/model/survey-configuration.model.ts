@@ -1,4 +1,3 @@
-import { ISurvey } from 'app/shared/model/survey.model';
 import { VisibilityType } from 'app/shared/model/enumerations/visibility-type.model';
 
 export interface ISurveyConfiguration {
@@ -11,7 +10,7 @@ export interface ISurveyConfiguration {
   groupsHavingResultVisibility?: string;
   maintainerUsers?: string;
   maintainerUserGroups?: string;
-  survey?: ISurvey;
+  surveyId?: number;
 }
 
 export class SurveyConfiguration implements ISurveyConfiguration {
@@ -25,6 +24,6 @@ export class SurveyConfiguration implements ISurveyConfiguration {
     public groupsHavingResultVisibility?: string,
     public maintainerUsers?: string,
     public maintainerUserGroups?: string,
-    public survey?: ISurvey
+    public surveyId?: number
   ) {}
 }

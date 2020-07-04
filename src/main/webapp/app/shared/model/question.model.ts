@@ -1,5 +1,4 @@
 import { IUserResponse } from 'app/shared/model/user-response.model';
-import { ISurvey } from 'app/shared/model/survey.model';
 import { QuestionType } from 'app/shared/model/enumerations/question-type.model';
 
 export interface IQuestion {
@@ -8,7 +7,7 @@ export interface IQuestion {
   type?: QuestionType;
   jsonData?: string;
   userResponses?: IUserResponse[];
-  survey?: ISurvey;
+  surveyId?: number;
 }
 
 export class Question implements IQuestion {
@@ -18,6 +17,6 @@ export class Question implements IQuestion {
     public type?: QuestionType,
     public jsonData?: string,
     public userResponses?: IUserResponse[],
-    public survey?: ISurvey
+    public surveyId?: number
   ) {}
 }

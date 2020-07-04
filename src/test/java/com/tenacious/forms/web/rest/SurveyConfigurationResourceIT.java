@@ -3,6 +3,9 @@ package com.tenacious.forms.web.rest;
 import com.tenacious.forms.FormsApp;
 import com.tenacious.forms.domain.SurveyConfiguration;
 import com.tenacious.forms.repository.SurveyConfigurationRepository;
+import com.tenacious.forms.service.SurveyConfigurationService;
+import com.tenacious.forms.service.dto.SurveyConfigurationDTO;
+import com.tenacious.forms.service.mapper.SurveyConfigurationMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,6 +62,12 @@ public class SurveyConfigurationResourceIT {
     private SurveyConfigurationRepository surveyConfigurationRepository;
 
     @Autowired
+    private SurveyConfigurationMapper surveyConfigurationMapper;
+
+    @Autowired
+    private SurveyConfigurationService surveyConfigurationService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -113,9 +122,10 @@ public class SurveyConfigurationResourceIT {
     public void createSurveyConfiguration() throws Exception {
         int databaseSizeBeforeCreate = surveyConfigurationRepository.findAll().size();
         // Create the SurveyConfiguration
+        SurveyConfigurationDTO surveyConfigurationDTO = surveyConfigurationMapper.toDto(surveyConfiguration);
         restSurveyConfigurationMockMvc.perform(post("/api/survey-configurations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(surveyConfiguration)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyConfigurationDTO)))
             .andExpect(status().isCreated());
 
         // Validate the SurveyConfiguration in the database
@@ -139,11 +149,12 @@ public class SurveyConfigurationResourceIT {
 
         // Create the SurveyConfiguration with an existing ID
         surveyConfiguration.setId(1L);
+        SurveyConfigurationDTO surveyConfigurationDTO = surveyConfigurationMapper.toDto(surveyConfiguration);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restSurveyConfigurationMockMvc.perform(post("/api/survey-configurations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(surveyConfiguration)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyConfigurationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the SurveyConfiguration in the database
@@ -222,10 +233,11 @@ public class SurveyConfigurationResourceIT {
             .groupsHavingResultVisibility(UPDATED_GROUPS_HAVING_RESULT_VISIBILITY)
             .maintainerUsers(UPDATED_MAINTAINER_USERS)
             .maintainerUserGroups(UPDATED_MAINTAINER_USER_GROUPS);
+        SurveyConfigurationDTO surveyConfigurationDTO = surveyConfigurationMapper.toDto(updatedSurveyConfiguration);
 
         restSurveyConfigurationMockMvc.perform(put("/api/survey-configurations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedSurveyConfiguration)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyConfigurationDTO)))
             .andExpect(status().isOk());
 
         // Validate the SurveyConfiguration in the database
@@ -247,10 +259,13 @@ public class SurveyConfigurationResourceIT {
     public void updateNonExistingSurveyConfiguration() throws Exception {
         int databaseSizeBeforeUpdate = surveyConfigurationRepository.findAll().size();
 
+        // Create the SurveyConfiguration
+        SurveyConfigurationDTO surveyConfigurationDTO = surveyConfigurationMapper.toDto(surveyConfiguration);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSurveyConfigurationMockMvc.perform(put("/api/survey-configurations")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(surveyConfiguration)))
+            .content(TestUtil.convertObjectToJsonBytes(surveyConfigurationDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the SurveyConfiguration in the database

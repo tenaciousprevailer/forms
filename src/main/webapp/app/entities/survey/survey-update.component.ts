@@ -37,8 +37,8 @@ export class SurveyUpdateComponent implements OnInit {
     createdBy: [],
     lastUpdatedBy: [],
     status: [],
-    surveyConfiguration: [],
-    surveyStats: [],
+    surveyConfigurationId: [],
+    surveyStatsId: [],
   });
 
   constructor(
@@ -69,11 +69,11 @@ export class SurveyUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: ISurveyConfiguration[]) => {
-          if (!survey.surveyConfiguration || !survey.surveyConfiguration.id) {
+          if (!survey.surveyConfigurationId) {
             this.surveyconfigurations = resBody;
           } else {
             this.surveyConfigurationService
-              .find(survey.surveyConfiguration.id)
+              .find(survey.surveyConfigurationId)
               .pipe(
                 map((subRes: HttpResponse<ISurveyConfiguration>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -91,11 +91,11 @@ export class SurveyUpdateComponent implements OnInit {
           })
         )
         .subscribe((resBody: ISurveyStats[]) => {
-          if (!survey.surveyStats || !survey.surveyStats.id) {
+          if (!survey.surveyStatsId) {
             this.surveystats = resBody;
           } else {
             this.surveyStatsService
-              .find(survey.surveyStats.id)
+              .find(survey.surveyStatsId)
               .pipe(
                 map((subRes: HttpResponse<ISurveyStats>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -119,8 +119,8 @@ export class SurveyUpdateComponent implements OnInit {
       createdBy: survey.createdBy,
       lastUpdatedBy: survey.lastUpdatedBy,
       status: survey.status,
-      surveyConfiguration: survey.surveyConfiguration,
-      surveyStats: survey.surveyStats,
+      surveyConfigurationId: survey.surveyConfigurationId,
+      surveyStatsId: survey.surveyStatsId,
     });
   }
 
@@ -155,8 +155,8 @@ export class SurveyUpdateComponent implements OnInit {
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       status: this.editForm.get(['status'])!.value,
-      surveyConfiguration: this.editForm.get(['surveyConfiguration'])!.value,
-      surveyStats: this.editForm.get(['surveyStats'])!.value,
+      surveyConfigurationId: this.editForm.get(['surveyConfigurationId'])!.value,
+      surveyStatsId: this.editForm.get(['surveyStatsId'])!.value,
     };
   }
 

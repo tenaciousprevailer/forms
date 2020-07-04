@@ -21,20 +21,20 @@
     <div class="table-responsive" id="entities" *ngIf="surveyConfigurations && surveyConfigurations.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.surveyVisibility">Survey Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.usersHavingVisibility">Users Having Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingVisibility">Groups Having Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.resultVisibility">Result Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.usersHavingResultVisibility">Users Having Result Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingResultVisibility">Groups Having Result Visibility</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.maintainerUsers">Maintainer Users</span></th>
-                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.maintainerUserGroups">Maintainer User Groups</span></th>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="surveyVisibility"><span jhiTranslate="formsApp.surveyConfiguration.surveyVisibility">Survey Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usersHavingVisibility"><span jhiTranslate="formsApp.surveyConfiguration.usersHavingVisibility">Users Having Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupsHavingVisibility"><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingVisibility">Groups Having Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="resultVisibility"><span jhiTranslate="formsApp.surveyConfiguration.resultVisibility">Result Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usersHavingResultVisibility"><span jhiTranslate="formsApp.surveyConfiguration.usersHavingResultVisibility">Users Having Result Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupsHavingResultVisibility"><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingResultVisibility">Groups Having Result Visibility</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="maintainerUsers"><span jhiTranslate="formsApp.surveyConfiguration.maintainerUsers">Maintainer Users</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="maintainerUserGroups"><span jhiTranslate="formsApp.surveyConfiguration.maintainerUserGroups">Maintainer User Groups</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let surveyConfiguration of surveyConfigurations ;trackBy: trackId">
                     <td><a [routerLink]="['/survey-configuration', surveyConfiguration.id, 'view']">{{ surveyConfiguration.id }}</a></td>
                     <td jhiTranslate="{{ 'formsApp.VisibilityType.' + surveyConfiguration.surveyVisibility }}">{{ surveyConfiguration.surveyVisibility }}</td>

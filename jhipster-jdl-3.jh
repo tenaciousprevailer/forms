@@ -70,3 +70,6 @@ relationship OneToMany {
     Question to UserResponse
 }
 
+dto * with mapstruct
+service * with serviceImpl
+paginate * with infinite-scroll
