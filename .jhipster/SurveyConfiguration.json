@@ -1,0 +1,59 @@
+{
+  "name": "SurveyConfiguration",
+  "fields": [
+    {
+      "fieldName": "surveyVisibility",
+      "fieldType": "VisibilityType",
+      "fieldValues": "ANYONE_WITH_LINK,SPECIFIC_USERS_AND_GROUPS"
+    },
+    {
+      "fieldName": "usersHavingVisibility",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "groupsHavingVisibility",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "resultVisibility",
+      "fieldType": "VisibilityType",
+      "fieldValues": "ANYONE_WITH_LINK,SPECIFIC_USERS_AND_GROUPS"
+    },
+    {
+      "fieldName": "usersHavingResultVisibility",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "groupsHavingResultVisibility",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maintainerUsers",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maintainerUserGroups",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "surveyConfiguration",
+      "relationshipName": "survey",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200704191011",
+  "entityTableName": "survey_configuration",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

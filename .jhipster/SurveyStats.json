@@ -1,0 +1,29 @@
+{
+  "name": "SurveyStats",
+  "fields": [
+    {
+      "fieldName": "totalResponseCount",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "surveyStats",
+      "relationshipName": "survey",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200704191111",
+  "entityTableName": "survey_stats",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

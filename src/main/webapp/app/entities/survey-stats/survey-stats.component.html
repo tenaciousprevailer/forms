@@ -1,0 +1,61 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="formsApp.surveyStats.home.title">Survey Stats</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-survey-stats" [routerLink]="['/survey-stats/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="formsApp.surveyStats.home.createLabel">
+            Create a new Survey Stats
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="surveyStats?.length === 0">
+        <span jhiTranslate="formsApp.surveyStats.home.notFound">No surveyStats found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="surveyStats && surveyStats.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyStats.totalResponseCount">Total Response Count</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let surveyStats of surveyStats ;trackBy: trackId">
+                    <td><a [routerLink]="['/survey-stats', surveyStats.id, 'view']">{{ surveyStats.id }}</a></td>
+                    <td>{{ surveyStats.totalResponseCount }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/survey-stats', surveyStats.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/survey-stats', surveyStats.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(surveyStats)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

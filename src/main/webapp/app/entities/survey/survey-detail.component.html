@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="survey">
+            <h2><span jhiTranslate="formsApp.survey.detail.title">Survey</span> {{ survey.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="formsApp.survey.name">Name</span></dt>
+                <dd>
+                    <span>{{ survey.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.description">Description</span></dt>
+                <dd>
+                    <span>{{ survey.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.dateStart">Date Start</span></dt>
+                <dd>
+                    <span>{{ survey.dateStart }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.dateEnd">Date End</span></dt>
+                <dd>
+                    <span>{{ survey.dateEnd }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.dateCreated">Date Created</span></dt>
+                <dd>
+                    <span>{{ survey.dateCreated }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.dateLastUpdated">Date Last Updated</span></dt>
+                <dd>
+                    <span>{{ survey.dateLastUpdated }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ survey.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.lastUpdatedBy">Last Updated By</span></dt>
+                <dd>
+                    <span>{{ survey.lastUpdatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'formsApp.SurveyStatus.' + survey.status }}">{{ survey.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.surveyConfiguration">Survey Configuration</span></dt>
+                <dd>
+                    <div *ngIf="survey.surveyConfiguration">
+                        <a [routerLink]="['/survey-configuration', survey.surveyConfiguration?.id, 'view']">{{ survey.surveyConfiguration?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="formsApp.survey.surveyStats">Survey Stats</span></dt>
+                <dd>
+                    <div *ngIf="survey.surveyStats">
+                        <a [routerLink]="['/survey-stats', survey.surveyStats?.id, 'view']">{{ survey.surveyStats?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/survey', survey.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

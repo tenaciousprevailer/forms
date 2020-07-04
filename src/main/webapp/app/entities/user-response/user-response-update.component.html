@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-response-heading" jhiTranslate="formsApp.userResponse.home.createOrEditLabel">Create or edit a User Response</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.userResponse.dateCreated" for="field_dateCreated">Date Created</label>
+                    <div class="d-flex">
+                        <input id="field_dateCreated" type="datetime-local" class="form-control" name="dateCreated" formControlName="dateCreated" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.userResponse.takenBy" for="field_takenBy">Taken By</label>
+                    <input type="text" class="form-control" name="takenBy" id="field_takenBy"
+                           formControlName="takenBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.userResponse.responseData" for="field_responseData">Response Data</label>
+                    <input type="text" class="form-control" name="responseData" id="field_responseData"
+                           formControlName="responseData"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.userResponse.survey" for="field_survey">Survey</label>
+                    <select class="form-control" id="field_survey" name="survey" formControlName="survey">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="surveyOption.id === editForm.get('survey')!.value?.id ? editForm.get('survey')!.value : surveyOption" *ngFor="let surveyOption of surveys; trackBy: trackById">{{ surveyOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.userResponse.question" for="field_question">Question</label>
+                    <select class="form-control" id="field_question" name="question" formControlName="question">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="questionOption.id === editForm.get('question')!.value?.id ? editForm.get('question')!.value : questionOption" *ngFor="let questionOption of questions; trackBy: trackById">{{ questionOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userResponse">
+            <h2><span jhiTranslate="formsApp.userResponse.detail.title">User Response</span> {{ userResponse.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="formsApp.userResponse.dateCreated">Date Created</span></dt>
+                <dd>
+                    <span>{{ userResponse.dateCreated }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.userResponse.takenBy">Taken By</span></dt>
+                <dd>
+                    <span>{{ userResponse.takenBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.userResponse.responseData">Response Data</span></dt>
+                <dd>
+                    <span>{{ userResponse.responseData }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.userResponse.survey">Survey</span></dt>
+                <dd>
+                    <div *ngIf="userResponse.survey">
+                        <a [routerLink]="['/survey', userResponse.survey?.id, 'view']">{{ userResponse.survey?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="formsApp.userResponse.question">Question</span></dt>
+                <dd>
+                    <div *ngIf="userResponse.question">
+                        <a [routerLink]="['/question', userResponse.question?.id, 'view']">{{ userResponse.question?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-response', userResponse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

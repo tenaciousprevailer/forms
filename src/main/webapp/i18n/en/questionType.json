@@ -1,0 +1,12 @@
+{
+  "formsApp": {
+    "QuestionType": {
+      "null": "",
+      "TEXT": "TEXT",
+      "PARAGRAPH": "PARAGRAPH",
+      "RADIO": "RADIO",
+      "CHECKBOXES": "CHECKBOXES",
+      "RATING": "RATING"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "name": "Survey",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateStart",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateEnd",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateLastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastUpdatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "SurveyStatus",
+      "fieldValues": "DRAFT,PUBLISHED,EXPIRED"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "surveyConfiguration",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "surveyConfiguration",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "surveyStats",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "surveyStats",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "question"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userResponse",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "userResponse"
+    }
+  ],
+  "changelogDate": "20200704190911",
+  "entityTableName": "survey",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

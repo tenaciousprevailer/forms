@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-survey-heading" jhiTranslate="formsApp.survey.home.createOrEditLabel">Create or edit a Survey</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.dateStart" for="field_dateStart">Date Start</label>
+                    <div class="d-flex">
+                        <input id="field_dateStart" type="datetime-local" class="form-control" name="dateStart" formControlName="dateStart" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.dateEnd" for="field_dateEnd">Date End</label>
+                    <div class="d-flex">
+                        <input id="field_dateEnd" type="datetime-local" class="form-control" name="dateEnd" formControlName="dateEnd" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.dateCreated" for="field_dateCreated">Date Created</label>
+                    <div class="d-flex">
+                        <input id="field_dateCreated" type="datetime-local" class="form-control" name="dateCreated" formControlName="dateCreated" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.dateLastUpdated" for="field_dateLastUpdated">Date Last Updated</label>
+                    <div class="d-flex">
+                        <input id="field_dateLastUpdated" type="datetime-local" class="form-control" name="dateLastUpdated" formControlName="dateLastUpdated" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.lastUpdatedBy" for="field_lastUpdatedBy">Last Updated By</label>
+                    <input type="text" class="form-control" name="lastUpdatedBy" id="field_lastUpdatedBy"
+                           formControlName="lastUpdatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="DRAFT">{{ 'formsApp.SurveyStatus.DRAFT' | translate }}</option>
+                        <option value="PUBLISHED">{{ 'formsApp.SurveyStatus.PUBLISHED' | translate }}</option>
+                        <option value="EXPIRED">{{ 'formsApp.SurveyStatus.EXPIRED' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.surveyConfiguration" for="field_surveyConfiguration">Survey Configuration</label>
+                    <select class="form-control" id="field_surveyConfiguration" name="surveyConfiguration" formControlName="surveyConfiguration">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="surveyConfigurationOption.id === editForm.get('surveyConfiguration')!.value?.id ? editForm.get('surveyConfiguration')!.value : surveyConfigurationOption" *ngFor="let surveyConfigurationOption of surveyconfigurations; trackBy: trackById">{{ surveyConfigurationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.surveyStats" for="field_surveyStats">Survey Stats</label>
+                    <select class="form-control" id="field_surveyStats" name="surveyStats" formControlName="surveyStats">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="surveyStatsOption.id === editForm.get('surveyStats')!.value?.id ? editForm.get('surveyStats')!.value : surveyStatsOption" *ngFor="let surveyStatsOption of surveystats; trackBy: trackById">{{ surveyStatsOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

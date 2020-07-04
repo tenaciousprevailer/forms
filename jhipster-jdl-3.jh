@@ -1,0 +1,72 @@
+
+enum VisibilityType {
+	ANYONE_WITH_LINK,
+    SPECIFIC_USERS_AND_GROUPS
+}
+
+enum QuestionType {
+	TEXT,
+    PARAGRAPH,
+    RADIO,
+    CHECKBOXES,
+	RATING    
+}
+
+enum SurveyStatus {
+	DRAFT,
+    PUBLISHED,
+    EXPIRED
+}
+
+entity Survey {
+	name String,
+	description String,
+	dateStart Instant,
+	dateEnd Instant,
+	dateCreated Instant,
+	dateLastUpdated Instant,
+	createdBy String,
+	lastUpdatedBy String,
+	status SurveyStatus
+}
+
+entity SurveyConfiguration {
+	surveyVisibility VisibilityType,
+	usersHavingVisibility String,
+	groupsHavingVisibility String,
+
+	resultVisibility VisibilityType
+	usersHavingResultVisibility String,
+	groupsHavingResultVisibility String,
+
+	maintainerUsers String,
+	maintainerUserGroups String
+}
+
+entity SurveyStats {
+	totalResponseCount Integer,
+}
+
+entity Question {
+	text String,
+    type QuestionType,
+    jsonData String
+}
+	
+entity UserResponse {
+	dateCreated Instant
+	takenBy String
+	responseData String
+}
+
+relationship OneToOne {
+	Survey to SurveyConfiguration,
+    Survey to SurveyStats
+}
+
+relationship OneToMany {
+    Survey to Question,
+    Survey to UserResponse
+    Question to UserResponse
+}
+

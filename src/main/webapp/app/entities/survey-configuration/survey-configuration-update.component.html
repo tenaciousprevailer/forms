@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-survey-configuration-heading" jhiTranslate="formsApp.surveyConfiguration.home.createOrEditLabel">Create or edit a Survey Configuration</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.surveyVisibility" for="field_surveyVisibility">Survey Visibility</label>
+                    <select class="form-control" name="surveyVisibility" formControlName="surveyVisibility" id="field_surveyVisibility">
+                        <option value="ANYONE_WITH_LINK">{{ 'formsApp.VisibilityType.ANYONE_WITH_LINK' | translate }}</option>
+                        <option value="SPECIFIC_USERS_AND_GROUPS">{{ 'formsApp.VisibilityType.SPECIFIC_USERS_AND_GROUPS' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.usersHavingVisibility" for="field_usersHavingVisibility">Users Having Visibility</label>
+                    <input type="text" class="form-control" name="usersHavingVisibility" id="field_usersHavingVisibility"
+                           formControlName="usersHavingVisibility"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.groupsHavingVisibility" for="field_groupsHavingVisibility">Groups Having Visibility</label>
+                    <input type="text" class="form-control" name="groupsHavingVisibility" id="field_groupsHavingVisibility"
+                           formControlName="groupsHavingVisibility"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.resultVisibility" for="field_resultVisibility">Result Visibility</label>
+                    <select class="form-control" name="resultVisibility" formControlName="resultVisibility" id="field_resultVisibility">
+                        <option value="ANYONE_WITH_LINK">{{ 'formsApp.VisibilityType.ANYONE_WITH_LINK' | translate }}</option>
+                        <option value="SPECIFIC_USERS_AND_GROUPS">{{ 'formsApp.VisibilityType.SPECIFIC_USERS_AND_GROUPS' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.usersHavingResultVisibility" for="field_usersHavingResultVisibility">Users Having Result Visibility</label>
+                    <input type="text" class="form-control" name="usersHavingResultVisibility" id="field_usersHavingResultVisibility"
+                           formControlName="usersHavingResultVisibility"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.groupsHavingResultVisibility" for="field_groupsHavingResultVisibility">Groups Having Result Visibility</label>
+                    <input type="text" class="form-control" name="groupsHavingResultVisibility" id="field_groupsHavingResultVisibility"
+                           formControlName="groupsHavingResultVisibility"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.maintainerUsers" for="field_maintainerUsers">Maintainer Users</label>
+                    <input type="text" class="form-control" name="maintainerUsers" id="field_maintainerUsers"
+                           formControlName="maintainerUsers"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="formsApp.surveyConfiguration.maintainerUserGroups" for="field_maintainerUserGroups">Maintainer User Groups</label>
+                    <input type="text" class="form-control" name="maintainerUserGroups" id="field_maintainerUserGroups"
+                           formControlName="maintainerUserGroups"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

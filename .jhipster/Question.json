@@ -1,0 +1,44 @@
+{
+  "name": "Question",
+  "fields": [
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "QuestionType",
+      "fieldValues": "TEXT,PARAGRAPH,RADIO,CHECKBOXES,RATING"
+    },
+    {
+      "fieldName": "jsonData",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userResponse",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "userResponse"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "survey",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200704191211",
+  "entityTableName": "question",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

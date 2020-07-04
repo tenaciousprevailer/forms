@@ -1,0 +1,5 @@
+export const enum VisibilityType {
+  ANYONE_WITH_LINK = 'ANYONE_WITH_LINK',
+
+  SPECIFIC_USERS_AND_GROUPS = 'SPECIFIC_USERS_AND_GROUPS',
+}

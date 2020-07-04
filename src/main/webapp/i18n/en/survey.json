@@ -1,0 +1,34 @@
+{
+  "formsApp": {
+    "survey": {
+      "home": {
+        "title": "Surveys",
+        "createLabel": "Create a new Survey",
+        "createOrEditLabel": "Create or edit a Survey",
+        "notFound": "No Surveys found"
+      },
+      "created": "A new Survey is created with identifier {{ param }}",
+      "updated": "A Survey is updated with identifier {{ param }}",
+      "deleted": "A Survey is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Survey {{ id }}?"
+      },
+      "detail": {
+        "title": "Survey"
+      },
+      "name": "Name",
+      "description": "Description",
+      "dateStart": "Date Start",
+      "dateEnd": "Date End",
+      "dateCreated": "Date Created",
+      "dateLastUpdated": "Date Last Updated",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "status": "Status",
+      "surveyConfiguration": "Survey Configuration",
+      "surveyStats": "Survey Stats",
+      "question": "Question",
+      "userResponse": "User Response"
+    }
+  }
+}

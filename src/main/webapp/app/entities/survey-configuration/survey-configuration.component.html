@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="formsApp.surveyConfiguration.home.title">Survey Configurations</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-survey-configuration" [routerLink]="['/survey-configuration/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="formsApp.surveyConfiguration.home.createLabel">
+            Create a new Survey Configuration
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="surveyConfigurations?.length === 0">
+        <span jhiTranslate="formsApp.surveyConfiguration.home.notFound">No surveyConfigurations found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="surveyConfigurations && surveyConfigurations.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.surveyVisibility">Survey Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.usersHavingVisibility">Users Having Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingVisibility">Groups Having Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.resultVisibility">Result Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.usersHavingResultVisibility">Users Having Result Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingResultVisibility">Groups Having Result Visibility</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.maintainerUsers">Maintainer Users</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.surveyConfiguration.maintainerUserGroups">Maintainer User Groups</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let surveyConfiguration of surveyConfigurations ;trackBy: trackId">
+                    <td><a [routerLink]="['/survey-configuration', surveyConfiguration.id, 'view']">{{ surveyConfiguration.id }}</a></td>
+                    <td jhiTranslate="{{ 'formsApp.VisibilityType.' + surveyConfiguration.surveyVisibility }}">{{ surveyConfiguration.surveyVisibility }}</td>
+                    <td>{{ surveyConfiguration.usersHavingVisibility }}</td>
+                    <td>{{ surveyConfiguration.groupsHavingVisibility }}</td>
+                    <td jhiTranslate="{{ 'formsApp.VisibilityType.' + surveyConfiguration.resultVisibility }}">{{ surveyConfiguration.resultVisibility }}</td>
+                    <td>{{ surveyConfiguration.usersHavingResultVisibility }}</td>
+                    <td>{{ surveyConfiguration.groupsHavingResultVisibility }}</td>
+                    <td>{{ surveyConfiguration.maintainerUsers }}</td>
+                    <td>{{ surveyConfiguration.maintainerUserGroups }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/survey-configuration', surveyConfiguration.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/survey-configuration', surveyConfiguration.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(surveyConfiguration)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

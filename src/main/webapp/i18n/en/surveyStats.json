@@ -1,0 +1,23 @@
+{
+  "formsApp": {
+    "surveyStats": {
+      "home": {
+        "title": "Survey Stats",
+        "createLabel": "Create a new Survey Stats",
+        "createOrEditLabel": "Create or edit a Survey Stats",
+        "notFound": "No Survey Stats found"
+      },
+      "created": "A new Survey Stats is created with identifier {{ param }}",
+      "updated": "A Survey Stats is updated with identifier {{ param }}",
+      "deleted": "A Survey Stats is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Survey Stats {{ id }}?"
+      },
+      "detail": {
+        "title": "Survey Stats"
+      },
+      "totalResponseCount": "Total Response Count",
+      "survey": "Survey"
+    }
+  }
+}

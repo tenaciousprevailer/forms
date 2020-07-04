@@ -1,0 +1,44 @@
+{
+  "name": "UserResponse",
+  "fields": [
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "takenBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responseData",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "userResponse",
+      "relationshipName": "survey",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "userResponse",
+      "relationshipName": "question",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200704191311",
+  "entityTableName": "user_response",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

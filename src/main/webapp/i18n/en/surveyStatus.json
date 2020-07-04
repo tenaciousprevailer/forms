@@ -1,0 +1,10 @@
+{
+  "formsApp": {
+    "SurveyStatus": {
+      "null": "",
+      "DRAFT": "DRAFT",
+      "PUBLISHED": "PUBLISHED",
+      "EXPIRED": "EXPIRED"
+    }
+  }
+}

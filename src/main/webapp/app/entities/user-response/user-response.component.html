@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="formsApp.userResponse.home.title">User Responses</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-response" [routerLink]="['/user-response/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="formsApp.userResponse.home.createLabel">
+            Create a new User Response
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userResponses?.length === 0">
+        <span jhiTranslate="formsApp.userResponse.home.notFound">No userResponses found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userResponses && userResponses.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.dateCreated">Date Created</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.takenBy">Taken By</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.responseData">Response Data</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.survey">Survey</span></th>
+                    <th scope="col" ><span jhiTranslate="formsApp.userResponse.question">Question</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userResponse of userResponses ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-response', userResponse.id, 'view']">{{ userResponse.id }}</a></td>
+                    <td>{{ userResponse.dateCreated | date:'medium' }}</td>
+                    <td>{{ userResponse.takenBy }}</td>
+                    <td>{{ userResponse.responseData }}</td>
+                    <td>
+                        <div *ngIf="userResponse.survey">
+                            <a [routerLink]="['/survey', userResponse.survey?.id, 'view']" >{{ userResponse.survey?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="userResponse.question">
+                            <a [routerLink]="['/question', userResponse.question?.id, 'view']" >{{ userResponse.question?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-response', userResponse.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-response', userResponse.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userResponse)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

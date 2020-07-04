@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="surveyConfiguration">
+            <h2><span jhiTranslate="formsApp.surveyConfiguration.detail.title">Survey Configuration</span> {{ surveyConfiguration.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.surveyVisibility">Survey Visibility</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'formsApp.VisibilityType.' + surveyConfiguration.surveyVisibility }}">{{ surveyConfiguration.surveyVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.usersHavingVisibility">Users Having Visibility</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.usersHavingVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingVisibility">Groups Having Visibility</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.groupsHavingVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.resultVisibility">Result Visibility</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'formsApp.VisibilityType.' + surveyConfiguration.resultVisibility }}">{{ surveyConfiguration.resultVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.usersHavingResultVisibility">Users Having Result Visibility</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.usersHavingResultVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.groupsHavingResultVisibility">Groups Having Result Visibility</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.groupsHavingResultVisibility }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.maintainerUsers">Maintainer Users</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.maintainerUsers }}</span>
+                </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.maintainerUserGroups">Maintainer User Groups</span></dt>
+                <dd>
+                    <span>{{ surveyConfiguration.maintainerUserGroups }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/survey-configuration', surveyConfiguration.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
