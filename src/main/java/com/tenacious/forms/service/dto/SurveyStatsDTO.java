@@ -11,6 +11,8 @@ public class SurveyStatsDTO implements Serializable {
 
     private Integer totalResponseCount;
 
+
+    private Long surveyId;
     
     public Long getId() {
         return id;
@@ -26,6 +28,14 @@ public class SurveyStatsDTO implements Serializable {
 
     public void setTotalResponseCount(Integer totalResponseCount) {
         this.totalResponseCount = totalResponseCount;
+    }
+
+    public Long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
     }
 
     @Override
@@ -51,6 +61,7 @@ public class SurveyStatsDTO implements Serializable {
         return "SurveyStatsDTO{" +
             "id=" + getId() +
             ", totalResponseCount=" + getTotalResponseCount() +
+            ", surveyId=" + getSurveyId() +
             "}";
     }
 }

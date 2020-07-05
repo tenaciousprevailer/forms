@@ -44,18 +44,6 @@
                 <dd>
                     <span jhiTranslate="{{ 'formsApp.SurveyStatus.' + survey.status }}">{{ survey.status }}</span>
                 </dd>
-                <dt><span jhiTranslate="formsApp.survey.surveyConfiguration">Survey Configuration</span></dt>
-                <dd>
-                    <div *ngIf="survey.surveyConfigurationId">
-                        <a [routerLink]="['/survey-configuration', survey.surveyConfigurationId, 'view']">{{ survey.surveyConfigurationId }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="formsApp.survey.surveyStats">Survey Stats</span></dt>
-                <dd>
-                    <div *ngIf="survey.surveyStatsId">
-                        <a [routerLink]="['/survey-stats', survey.surveyStatsId, 'view']">{{ survey.surveyStatsId }}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

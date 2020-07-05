@@ -13,11 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link SurveyConfiguration}.
@@ -53,21 +49,6 @@ public class SurveyConfigurationServiceImpl implements SurveyConfigurationServic
             .map(surveyConfigurationMapper::toDto);
     }
 
-
-
-    /**
-     *  Get all the surveyConfigurations where Survey is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<SurveyConfigurationDTO> findAllWhereSurveyIsNull() {
-        log.debug("Request to get all surveyConfigurations where Survey is null");
-        return StreamSupport
-            .stream(surveyConfigurationRepository.findAll().spliterator(), false)
-            .filter(surveyConfiguration -> surveyConfiguration.getSurvey() == null)
-            .map(surveyConfigurationMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
 
     @Override
     @Transactional(readOnly = true)

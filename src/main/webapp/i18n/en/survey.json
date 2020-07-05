@@ -25,10 +25,10 @@
       "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "status": "Status",
-      "surveyConfiguration": "Survey Configuration",
-      "surveyStats": "Survey Stats",
       "question": "Question",
-      "userResponse": "User Response"
+      "userResponse": "User Response",
+      "surveyConfiguration": "Survey Configuration",
+      "surveyStats": "Survey Stats"
     }
   }
 }

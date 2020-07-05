@@ -43,12 +43,6 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="survey_configuration_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_survey_survey_configuration_id" />
-            </column>
-            <column name="survey_stats_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_survey_survey_stats_id" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="survey" columnName="date_start" columnDataType="datetime"/>

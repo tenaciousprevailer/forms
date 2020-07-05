@@ -4,18 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ISurvey, Survey } from 'app/shared/model/survey.model';
 import { SurveyService } from './survey.service';
-import { ISurveyConfiguration } from 'app/shared/model/survey-configuration.model';
-import { SurveyConfigurationService } from 'app/entities/survey-configuration/survey-configuration.service';
-import { ISurveyStats } from 'app/shared/model/survey-stats.model';
-import { SurveyStatsService } from 'app/entities/survey-stats/survey-stats.service';
-
-type SelectableEntity = ISurveyConfiguration | ISurveyStats;
 
 @Component({
   selector: 'jhi-survey-update',
@@ -23,8 +16,6 @@ type SelectableEntity = ISurveyConfiguration | ISurveyStats;
 })
 export class SurveyUpdateComponent implements OnInit {
   isSaving = false;
-  surveyconfigurations: ISurveyConfiguration[] = [];
-  surveystats: ISurveyStats[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -37,17 +28,9 @@ export class SurveyUpdateComponent implements OnInit {
     createdBy: [],
     lastUpdatedBy: [],
     status: [],
-    surveyConfigurationId: [],
-    surveyStatsId: [],
   });
 
-  constructor(
-    protected surveyService: SurveyService,
-    protected surveyConfigurationService: SurveyConfigurationService,
-    protected surveyStatsService: SurveyStatsService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected surveyService: SurveyService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ survey }) => {
@@ -60,50 +43,6 @@ export class SurveyUpdateComponent implements OnInit {
       }
 
       this.updateForm(survey);
-
-      this.surveyConfigurationService
-        .query({ filter: 'survey-is-null' })
-        .pipe(
-          map((res: HttpResponse<ISurveyConfiguration[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ISurveyConfiguration[]) => {
-          if (!survey.surveyConfigurationId) {
-            this.surveyconfigurations = resBody;
-          } else {
-            this.surveyConfigurationService
-              .find(survey.surveyConfigurationId)
-              .pipe(
-                map((subRes: HttpResponse<ISurveyConfiguration>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ISurveyConfiguration[]) => (this.surveyconfigurations = concatRes));
-          }
-        });
-
-      this.surveyStatsService
-        .query({ filter: 'survey-is-null' })
-        .pipe(
-          map((res: HttpResponse<ISurveyStats[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ISurveyStats[]) => {
-          if (!survey.surveyStatsId) {
-            this.surveystats = resBody;
-          } else {
-            this.surveyStatsService
-              .find(survey.surveyStatsId)
-              .pipe(
-                map((subRes: HttpResponse<ISurveyStats>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ISurveyStats[]) => (this.surveystats = concatRes));
-          }
-        });
     });
   }
 
@@ -119,8 +58,6 @@ export class SurveyUpdateComponent implements OnInit {
       createdBy: survey.createdBy,
       lastUpdatedBy: survey.lastUpdatedBy,
       status: survey.status,
-      surveyConfigurationId: survey.surveyConfigurationId,
-      surveyStatsId: survey.surveyStatsId,
     });
   }
 
@@ -155,8 +92,6 @@ export class SurveyUpdateComponent implements OnInit {
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       status: this.editForm.get(['status'])!.value,
-      surveyConfigurationId: this.editForm.get(['surveyConfigurationId'])!.value,
-      surveyStatsId: this.editForm.get(['surveyStatsId'])!.value,
     };
   }
 
@@ -174,9 +109,5 @@ export class SurveyUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
   }
 }

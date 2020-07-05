@@ -42,7 +42,8 @@
       "otherEntityName": "survey",
       "otherEntityRelationshipName": "surveyConfiguration",
       "relationshipName": "survey",
-      "ownerSide": false
+      "otherEntityField": "id",
+      "ownerSide": true
     }
   ],
   "changelogDate": "20200704191011",

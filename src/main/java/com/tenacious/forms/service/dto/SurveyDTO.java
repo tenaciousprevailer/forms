@@ -29,10 +29,6 @@ public class SurveyDTO implements Serializable {
 
     private SurveyStatus status;
 
-
-    private Long surveyConfigurationId;
-
-    private Long surveyStatsId;
     
     public Long getId() {
         return id;
@@ -114,22 +110,6 @@ public class SurveyDTO implements Serializable {
         this.status = status;
     }
 
-    public Long getSurveyConfigurationId() {
-        return surveyConfigurationId;
-    }
-
-    public void setSurveyConfigurationId(Long surveyConfigurationId) {
-        this.surveyConfigurationId = surveyConfigurationId;
-    }
-
-    public Long getSurveyStatsId() {
-        return surveyStatsId;
-    }
-
-    public void setSurveyStatsId(Long surveyStatsId) {
-        this.surveyStatsId = surveyStatsId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -161,8 +141,6 @@ public class SurveyDTO implements Serializable {
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastUpdatedBy='" + getLastUpdatedBy() + "'" +
             ", status='" + getStatus() + "'" +
-            ", surveyConfigurationId=" + getSurveyConfigurationId() +
-            ", surveyStatsId=" + getSurveyStatsId() +
             "}";
     }
 }

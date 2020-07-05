@@ -14,10 +14,10 @@ export interface ISurvey {
   createdBy?: string;
   lastUpdatedBy?: string;
   status?: SurveyStatus;
-  surveyConfigurationId?: number;
-  surveyStatsId?: number;
   questions?: IQuestion[];
   userResponses?: IUserResponse[];
+  surveyConfigurationId?: number;
+  surveyStatsId?: number;
 }
 
 export class Survey implements ISurvey {
@@ -32,9 +32,9 @@ export class Survey implements ISurvey {
     public createdBy?: string,
     public lastUpdatedBy?: string,
     public status?: SurveyStatus,
-    public surveyConfigurationId?: number,
-    public surveyStatsId?: number,
     public questions?: IQuestion[],
-    public userResponses?: IUserResponse[]
+    public userResponses?: IUserResponse[],
+    public surveyConfigurationId?: number,
+    public surveyStatsId?: number
   ) {}
 }

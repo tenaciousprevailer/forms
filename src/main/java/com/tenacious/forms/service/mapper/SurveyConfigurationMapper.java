@@ -9,11 +9,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link SurveyConfiguration} and its DTO {@link SurveyConfigurationDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {SurveyMapper.class})
 public interface SurveyConfigurationMapper extends EntityMapper<SurveyConfigurationDTO, SurveyConfiguration> {
 
+    @Mapping(source = "survey.id", target = "surveyId")
+    SurveyConfigurationDTO toDto(SurveyConfiguration surveyConfiguration);
 
-    @Mapping(target = "survey", ignore = true)
+    @Mapping(source = "surveyId", target = "survey")
     SurveyConfiguration toEntity(SurveyConfigurationDTO surveyConfigurationDTO);
 
     default SurveyConfiguration fromId(Long id) {

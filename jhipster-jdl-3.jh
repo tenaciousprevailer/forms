@@ -60,8 +60,8 @@ entity UserResponse {
 }
 
 relationship OneToOne {
-	Survey to SurveyConfiguration,
-    Survey to SurveyStats
+	SurveyConfiguration to Survey,
+    SurveyStats to Survey
 }
 
 relationship OneToMany {

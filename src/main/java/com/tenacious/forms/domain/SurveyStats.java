@@ -1,6 +1,5 @@
 package com.tenacious.forms.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -25,8 +24,8 @@ public class SurveyStats implements Serializable {
     @Column(name = "total_response_count")
     private Integer totalResponseCount;
 
-    @OneToOne(mappedBy = "surveyStats")
-    @JsonIgnore
+    @OneToOne
+    @JoinColumn(unique = true)
     private Survey survey;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

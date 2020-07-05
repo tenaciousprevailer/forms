@@ -32,8 +32,6 @@
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="formsApp.survey.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="lastUpdatedBy"><span jhiTranslate="formsApp.survey.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="formsApp.survey.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="surveyConfigurationId"><span jhiTranslate="formsApp.survey.surveyConfiguration">Survey Configuration</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="surveyStatsId"><span jhiTranslate="formsApp.survey.surveyStats">Survey Stats</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -49,16 +47,6 @@
                     <td>{{ survey.createdBy }}</td>
                     <td>{{ survey.lastUpdatedBy }}</td>
                     <td jhiTranslate="{{ 'formsApp.SurveyStatus.' + survey.status }}">{{ survey.status }}</td>
-                    <td>
-                        <div *ngIf="survey.surveyConfigurationId">
-                            <a [routerLink]="['/survey-configuration', survey.surveyConfigurationId , 'view']" >{{ survey.surveyConfigurationId }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="survey.surveyStatsId">
-                            <a [routerLink]="['/survey-stats', survey.surveyStatsId , 'view']" >{{ survey.surveyStatsId }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

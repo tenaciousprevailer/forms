@@ -9,19 +9,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Survey} and its DTO {@link SurveyDTO}.
  */
-@Mapper(componentModel = "spring", uses = {SurveyConfigurationMapper.class, SurveyStatsMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface SurveyMapper extends EntityMapper<SurveyDTO, Survey> {
 
-    @Mapping(source = "surveyConfiguration.id", target = "surveyConfigurationId")
-    @Mapping(source = "surveyStats.id", target = "surveyStatsId")
-    SurveyDTO toDto(Survey survey);
 
-    @Mapping(source = "surveyConfigurationId", target = "surveyConfiguration")
-    @Mapping(source = "surveyStatsId", target = "surveyStats")
     @Mapping(target = "questions", ignore = true)
     @Mapping(target = "removeQuestion", ignore = true)
     @Mapping(target = "userResponses", ignore = true)
     @Mapping(target = "removeUserResponse", ignore = true)
+    @Mapping(target = "surveyConfiguration", ignore = true)
+    @Mapping(target = "surveyStats", ignore = true)
     Survey toEntity(SurveyDTO surveyDTO);
 
     default Survey fromId(Long id) {

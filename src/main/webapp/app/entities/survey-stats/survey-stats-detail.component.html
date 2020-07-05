@@ -12,6 +12,12 @@
                 <dd>
                     <span>{{ surveyStats.totalResponseCount }}</span>
                 </dd>
+                <dt><span jhiTranslate="formsApp.surveyStats.survey">Survey</span></dt>
+                <dd>
+                    <div *ngIf="surveyStats.surveyId">
+                        <a [routerLink]="['/survey', surveyStats.surveyId, 'view']">{{ surveyStats.surveyId }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

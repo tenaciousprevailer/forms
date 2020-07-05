@@ -4,9 +4,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ISurveyConfiguration, SurveyConfiguration } from 'app/shared/model/survey-configuration.model';
 import { SurveyConfigurationService } from './survey-configuration.service';
+import { ISurvey } from 'app/shared/model/survey.model';
+import { SurveyService } from 'app/entities/survey/survey.service';
 
 @Component({
   selector: 'jhi-survey-configuration-update',
@@ -14,6 +17,7 @@ import { SurveyConfigurationService } from './survey-configuration.service';
 })
 export class SurveyConfigurationUpdateComponent implements OnInit {
   isSaving = false;
+  surveys: ISurvey[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -25,10 +29,12 @@ export class SurveyConfigurationUpdateComponent implements OnInit {
     groupsHavingResultVisibility: [],
     maintainerUsers: [],
     maintainerUserGroups: [],
+    surveyId: [],
   });
 
   constructor(
     protected surveyConfigurationService: SurveyConfigurationService,
+    protected surveyService: SurveyService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -36,6 +42,28 @@ export class SurveyConfigurationUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ surveyConfiguration }) => {
       this.updateForm(surveyConfiguration);
+
+      this.surveyService
+        .query({ filter: 'surveyconfiguration-is-null' })
+        .pipe(
+          map((res: HttpResponse<ISurvey[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: ISurvey[]) => {
+          if (!surveyConfiguration.surveyId) {
+            this.surveys = resBody;
+          } else {
+            this.surveyService
+              .find(surveyConfiguration.surveyId)
+              .pipe(
+                map((subRes: HttpResponse<ISurvey>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: ISurvey[]) => (this.surveys = concatRes));
+          }
+        });
     });
   }
 
@@ -50,6 +78,7 @@ export class SurveyConfigurationUpdateComponent implements OnInit {
       groupsHavingResultVisibility: surveyConfiguration.groupsHavingResultVisibility,
       maintainerUsers: surveyConfiguration.maintainerUsers,
       maintainerUserGroups: surveyConfiguration.maintainerUserGroups,
+      surveyId: surveyConfiguration.surveyId,
     });
   }
 
@@ -79,6 +108,7 @@ export class SurveyConfigurationUpdateComponent implements OnInit {
       groupsHavingResultVisibility: this.editForm.get(['groupsHavingResultVisibility'])!.value,
       maintainerUsers: this.editForm.get(['maintainerUsers'])!.value,
       maintainerUserGroups: this.editForm.get(['maintainerUserGroups'])!.value,
+      surveyId: this.editForm.get(['surveyId'])!.value,
     };
   }
 
@@ -96,5 +126,9 @@ export class SurveyConfigurationUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ISurvey): any {
+    return item.id;
   }
 }

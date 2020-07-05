@@ -22,7 +22,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.tenacious.forms.domain.SurveyConfiguration}.
@@ -88,16 +87,10 @@ public class SurveyConfigurationResource {
      * {@code GET  /survey-configurations} : get all the surveyConfigurations.
      *
      * @param pageable the pagination information.
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of surveyConfigurations in body.
      */
     @GetMapping("/survey-configurations")
-    public ResponseEntity<List<SurveyConfigurationDTO>> getAllSurveyConfigurations(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("survey-is-null".equals(filter)) {
-            log.debug("REST request to get all SurveyConfigurations where survey is null");
-            return new ResponseEntity<>(surveyConfigurationService.findAllWhereSurveyIsNull(),
-                    HttpStatus.OK);
-        }
+    public ResponseEntity<List<SurveyConfigurationDTO>> getAllSurveyConfigurations(Pageable pageable) {
         log.debug("REST request to get a page of SurveyConfigurations");
         Page<SurveyConfigurationDTO> page = surveyConfigurationService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

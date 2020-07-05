@@ -40,6 +40,9 @@
             <column name="maintainer_user_groups" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="survey_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_survey_configuration_survey_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

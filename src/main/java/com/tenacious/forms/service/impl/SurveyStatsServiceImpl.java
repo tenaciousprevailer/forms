@@ -13,11 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link SurveyStats}.
@@ -53,21 +49,6 @@ public class SurveyStatsServiceImpl implements SurveyStatsService {
             .map(surveyStatsMapper::toDto);
     }
 
-
-
-    /**
-     *  Get all the surveyStats where Survey is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<SurveyStatsDTO> findAllWhereSurveyIsNull() {
-        log.debug("Request to get all surveyStats where Survey is null");
-        return StreamSupport
-            .stream(surveyStatsRepository.findAll().spliterator(), false)
-            .filter(surveyStats -> surveyStats.getSurvey() == null)
-            .map(surveyStatsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
 
     @Override
     @Transactional(readOnly = true)

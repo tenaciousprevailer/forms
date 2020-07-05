@@ -13,7 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link Survey}.
@@ -49,6 +53,36 @@ public class SurveyServiceImpl implements SurveyService {
             .map(surveyMapper::toDto);
     }
 
+
+
+    /**
+     *  Get all the surveys where SurveyConfiguration is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true) 
+    public List<SurveyDTO> findAllWhereSurveyConfigurationIsNull() {
+        log.debug("Request to get all surveys where SurveyConfiguration is null");
+        return StreamSupport
+            .stream(surveyRepository.findAll().spliterator(), false)
+            .filter(survey -> survey.getSurveyConfiguration() == null)
+            .map(surveyMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+
+    /**
+     *  Get all the surveys where SurveyStats is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true) 
+    public List<SurveyDTO> findAllWhereSurveyStatsIsNull() {
+        log.debug("Request to get all surveys where SurveyStats is null");
+        return StreamSupport
+            .stream(surveyRepository.findAll().spliterator(), false)
+            .filter(survey -> survey.getSurveyStats() == null)
+            .map(surveyMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     @Override
     @Transactional(readOnly = true)

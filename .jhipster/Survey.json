@@ -41,22 +41,6 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "surveyConfiguration",
-      "otherEntityRelationshipName": "survey",
-      "relationshipName": "surveyConfiguration",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "surveyStats",
-      "otherEntityRelationshipName": "survey",
-      "relationshipName": "surveyStats",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "one-to-many",
       "otherEntityName": "question",
       "otherEntityRelationshipName": "survey",
@@ -67,6 +51,20 @@
       "otherEntityName": "userResponse",
       "otherEntityRelationshipName": "survey",
       "relationshipName": "userResponse"
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "surveyConfiguration",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "surveyConfiguration",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "surveyStats",
+      "otherEntityRelationshipName": "survey",
+      "relationshipName": "surveyStats",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20200704190911",

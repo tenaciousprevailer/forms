@@ -26,6 +26,8 @@ public class SurveyConfigurationDTO implements Serializable {
 
     private String maintainerUserGroups;
 
+
+    private Long surveyId;
     
     public Long getId() {
         return id;
@@ -99,6 +101,14 @@ public class SurveyConfigurationDTO implements Serializable {
         this.maintainerUserGroups = maintainerUserGroups;
     }
 
+    public Long getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -129,6 +139,7 @@ public class SurveyConfigurationDTO implements Serializable {
             ", groupsHavingResultVisibility='" + getGroupsHavingResultVisibility() + "'" +
             ", maintainerUsers='" + getMaintainerUsers() + "'" +
             ", maintainerUserGroups='" + getMaintainerUserGroups() + "'" +
+            ", surveyId=" + getSurveyId() +
             "}";
     }
 }

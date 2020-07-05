@@ -40,6 +40,12 @@
                 <dd>
                     <span>{{ surveyConfiguration.maintainerUserGroups }}</span>
                 </dd>
+                <dt><span jhiTranslate="formsApp.surveyConfiguration.survey">Survey</span></dt>
+                <dd>
+                    <div *ngIf="surveyConfiguration.surveyId">
+                        <a [routerLink]="['/survey', surveyConfiguration.surveyId, 'view']">{{ surveyConfiguration.surveyId }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
