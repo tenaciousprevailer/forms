@@ -20,6 +20,10 @@
                 <dd>
                     <span>{{ question.jsonData }}</span>
                 </dd>
+                <dt><span jhiTranslate="formsApp.question.totalResponseCount">Total Response Count</span></dt>
+                <dd>
+                    <span>{{ question.totalResponseCount }}</span>
+                </dd>
                 <dt><span jhiTranslate="formsApp.question.survey">Survey</span></dt>
                 <dd>
                     <div *ngIf="question.surveyId">

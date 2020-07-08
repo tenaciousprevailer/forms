@@ -64,12 +64,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="formsApp.survey.status" for="field_status">Status</label>
-                    <select class="form-control" name="status" formControlName="status" id="field_status">
-                        <option value="DRAFT">{{ 'formsApp.SurveyStatus.DRAFT' | translate }}</option>
-                        <option value="PUBLISHED">{{ 'formsApp.SurveyStatus.PUBLISHED' | translate }}</option>
-                        <option value="EXPIRED">{{ 'formsApp.SurveyStatus.EXPIRED' | translate }}</option>
-                    </select>
+                    <label class="form-control-label" jhiTranslate="formsApp.survey.totalResponseCount" for="field_totalResponseCount">Total Response Count</label>
+                    <input type="number" class="form-control" name="totalResponseCount" id="field_totalResponseCount"
+                           formControlName="totalResponseCount"/>
                 </div>
             </div>
 

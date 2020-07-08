@@ -1,6 +1,5 @@
 package com.tenacious.forms.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -10,8 +9,6 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.tenacious.forms.domain.enumeration.SurveyStatus;
 
 /**
  * A Survey.
@@ -51,9 +48,8 @@ public class Survey implements Serializable {
     @Column(name = "last_updated_by")
     private String lastUpdatedBy;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private SurveyStatus status;
+    @Column(name = "total_response_count")
+    private Integer totalResponseCount;
 
     @OneToMany(mappedBy = "survey")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -61,15 +57,7 @@ public class Survey implements Serializable {
 
     @OneToMany(mappedBy = "survey")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<UserResponse> userResponses = new HashSet<>();
-
-    @OneToOne(mappedBy = "survey")
-    @JsonIgnore
-    private SurveyConfiguration surveyConfiguration;
-
-    @OneToOne(mappedBy = "survey")
-    @JsonIgnore
-    private SurveyStats surveyStats;
+    private Set<Answer> answers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -184,17 +172,17 @@ public class Survey implements Serializable {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public SurveyStatus getStatus() {
-        return status;
+    public Integer getTotalResponseCount() {
+        return totalResponseCount;
     }
 
-    public Survey status(SurveyStatus status) {
-        this.status = status;
+    public Survey totalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
         return this;
     }
 
-    public void setStatus(SurveyStatus status) {
-        this.status = status;
+    public void setTotalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
     }
 
     public Set<Question> getQuestions() {
@@ -222,55 +210,29 @@ public class Survey implements Serializable {
         this.questions = questions;
     }
 
-    public Set<UserResponse> getUserResponses() {
-        return userResponses;
+    public Set<Answer> getAnswers() {
+        return answers;
     }
 
-    public Survey userResponses(Set<UserResponse> userResponses) {
-        this.userResponses = userResponses;
+    public Survey answers(Set<Answer> answers) {
+        this.answers = answers;
         return this;
     }
 
-    public Survey addUserResponse(UserResponse userResponse) {
-        this.userResponses.add(userResponse);
-        userResponse.setSurvey(this);
+    public Survey addAnswer(Answer answer) {
+        this.answers.add(answer);
+        answer.setSurvey(this);
         return this;
     }
 
-    public Survey removeUserResponse(UserResponse userResponse) {
-        this.userResponses.remove(userResponse);
-        userResponse.setSurvey(null);
+    public Survey removeAnswer(Answer answer) {
+        this.answers.remove(answer);
+        answer.setSurvey(null);
         return this;
     }
 
-    public void setUserResponses(Set<UserResponse> userResponses) {
-        this.userResponses = userResponses;
-    }
-
-    public SurveyConfiguration getSurveyConfiguration() {
-        return surveyConfiguration;
-    }
-
-    public Survey surveyConfiguration(SurveyConfiguration surveyConfiguration) {
-        this.surveyConfiguration = surveyConfiguration;
-        return this;
-    }
-
-    public void setSurveyConfiguration(SurveyConfiguration surveyConfiguration) {
-        this.surveyConfiguration = surveyConfiguration;
-    }
-
-    public SurveyStats getSurveyStats() {
-        return surveyStats;
-    }
-
-    public Survey surveyStats(SurveyStats surveyStats) {
-        this.surveyStats = surveyStats;
-        return this;
-    }
-
-    public void setSurveyStats(SurveyStats surveyStats) {
-        this.surveyStats = surveyStats;
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -303,7 +265,7 @@ public class Survey implements Serializable {
             ", dateLastUpdated='" + getDateLastUpdated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastUpdatedBy='" + getLastUpdatedBy() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", totalResponseCount=" + getTotalResponseCount() +
             "}";
     }
 }

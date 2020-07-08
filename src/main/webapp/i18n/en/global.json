@@ -12,6 +12,7 @@
         "surveyStats": "Survey Stats",
         "question": "Question",
         "userResponse": "User Response",
+        "answer": "Answer",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

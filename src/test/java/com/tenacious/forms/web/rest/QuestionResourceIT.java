@@ -42,6 +42,9 @@ public class QuestionResourceIT {
     private static final String DEFAULT_JSON_DATA = "AAAAAAAAAA";
     private static final String UPDATED_JSON_DATA = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_TOTAL_RESPONSE_COUNT = 1;
+    private static final Integer UPDATED_TOTAL_RESPONSE_COUNT = 2;
+
     @Autowired
     private QuestionRepository questionRepository;
 
@@ -69,7 +72,8 @@ public class QuestionResourceIT {
         Question question = new Question()
             .text(DEFAULT_TEXT)
             .type(DEFAULT_TYPE)
-            .jsonData(DEFAULT_JSON_DATA);
+            .jsonData(DEFAULT_JSON_DATA)
+            .totalResponseCount(DEFAULT_TOTAL_RESPONSE_COUNT);
         return question;
     }
     /**
@@ -82,7 +86,8 @@ public class QuestionResourceIT {
         Question question = new Question()
             .text(UPDATED_TEXT)
             .type(UPDATED_TYPE)
-            .jsonData(UPDATED_JSON_DATA);
+            .jsonData(UPDATED_JSON_DATA)
+            .totalResponseCount(UPDATED_TOTAL_RESPONSE_COUNT);
         return question;
     }
 
@@ -109,6 +114,7 @@ public class QuestionResourceIT {
         assertThat(testQuestion.getText()).isEqualTo(DEFAULT_TEXT);
         assertThat(testQuestion.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testQuestion.getJsonData()).isEqualTo(DEFAULT_JSON_DATA);
+        assertThat(testQuestion.getTotalResponseCount()).isEqualTo(DEFAULT_TOTAL_RESPONSE_COUNT);
     }
 
     @Test
@@ -145,7 +151,8 @@ public class QuestionResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(question.getId().intValue())))
             .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].jsonData").value(hasItem(DEFAULT_JSON_DATA)));
+            .andExpect(jsonPath("$.[*].jsonData").value(hasItem(DEFAULT_JSON_DATA)))
+            .andExpect(jsonPath("$.[*].totalResponseCount").value(hasItem(DEFAULT_TOTAL_RESPONSE_COUNT)));
     }
     
     @Test
@@ -161,7 +168,8 @@ public class QuestionResourceIT {
             .andExpect(jsonPath("$.id").value(question.getId().intValue()))
             .andExpect(jsonPath("$.text").value(DEFAULT_TEXT))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.jsonData").value(DEFAULT_JSON_DATA));
+            .andExpect(jsonPath("$.jsonData").value(DEFAULT_JSON_DATA))
+            .andExpect(jsonPath("$.totalResponseCount").value(DEFAULT_TOTAL_RESPONSE_COUNT));
     }
     @Test
     @Transactional
@@ -186,7 +194,8 @@ public class QuestionResourceIT {
         updatedQuestion
             .text(UPDATED_TEXT)
             .type(UPDATED_TYPE)
-            .jsonData(UPDATED_JSON_DATA);
+            .jsonData(UPDATED_JSON_DATA)
+            .totalResponseCount(UPDATED_TOTAL_RESPONSE_COUNT);
         QuestionDTO questionDTO = questionMapper.toDto(updatedQuestion);
 
         restQuestionMockMvc.perform(put("/api/questions")
@@ -201,6 +210,7 @@ public class QuestionResourceIT {
         assertThat(testQuestion.getText()).isEqualTo(UPDATED_TEXT);
         assertThat(testQuestion.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testQuestion.getJsonData()).isEqualTo(UPDATED_JSON_DATA);
+        assertThat(testQuestion.getTotalResponseCount()).isEqualTo(UPDATED_TOTAL_RESPONSE_COUNT);
     }
 
     @Test

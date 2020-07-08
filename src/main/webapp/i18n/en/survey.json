@@ -24,11 +24,9 @@
       "dateLastUpdated": "Date Last Updated",
       "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
-      "status": "Status",
+      "totalResponseCount": "Total Response Count",
       "question": "Question",
-      "userResponse": "User Response",
-      "surveyConfiguration": "Survey Configuration",
-      "surveyStats": "Survey Stats"
+      "answer": "Answer"
     }
   }
 }

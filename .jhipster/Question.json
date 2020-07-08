@@ -13,14 +13,18 @@
     {
       "fieldName": "jsonData",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "totalResponseCount",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "userResponse",
+      "otherEntityName": "answer",
       "otherEntityRelationshipName": "question",
-      "relationshipName": "userResponse"
+      "relationshipName": "answer"
     },
     {
       "relationshipType": "many-to-one",

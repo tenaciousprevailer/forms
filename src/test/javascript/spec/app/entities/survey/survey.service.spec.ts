@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { SurveyService } from 'app/entities/survey/survey.service';
 import { ISurvey, Survey } from 'app/shared/model/survey.model';
-import { SurveyStatus } from 'app/shared/model/enumerations/survey-status.model';
 
 describe('Service Tests', () => {
   describe('Survey Service', () => {
@@ -25,18 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Survey(
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        currentDate,
-        currentDate,
-        currentDate,
-        currentDate,
-        'AAAAAAA',
-        'AAAAAAA',
-        SurveyStatus.DRAFT
-      );
+      elemDefault = new Survey(0, 'AAAAAAA', 'AAAAAAA', currentDate, currentDate, currentDate, currentDate, 'AAAAAAA', 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -98,7 +86,7 @@ describe('Service Tests', () => {
             dateLastUpdated: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             lastUpdatedBy: 'BBBBBB',
-            status: 'BBBBBB',
+            totalResponseCount: 1,
           },
           elemDefault
         );
@@ -131,7 +119,7 @@ describe('Service Tests', () => {
             dateLastUpdated: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             lastUpdatedBy: 'BBBBBB',
-            status: 'BBBBBB',
+            totalResponseCount: 1,
           },
           elemDefault
         );

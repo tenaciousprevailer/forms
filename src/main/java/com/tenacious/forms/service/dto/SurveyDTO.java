@@ -2,7 +2,6 @@ package com.tenacious.forms.service.dto;
 
 import java.time.Instant;
 import java.io.Serializable;
-import com.tenacious.forms.domain.enumeration.SurveyStatus;
 
 /**
  * A DTO for the {@link com.tenacious.forms.domain.Survey} entity.
@@ -27,7 +26,7 @@ public class SurveyDTO implements Serializable {
 
     private String lastUpdatedBy;
 
-    private SurveyStatus status;
+    private Integer totalResponseCount;
 
     
     public Long getId() {
@@ -102,12 +101,12 @@ public class SurveyDTO implements Serializable {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public SurveyStatus getStatus() {
-        return status;
+    public Integer getTotalResponseCount() {
+        return totalResponseCount;
     }
 
-    public void setStatus(SurveyStatus status) {
-        this.status = status;
+    public void setTotalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
     }
 
     @Override
@@ -140,7 +139,7 @@ public class SurveyDTO implements Serializable {
             ", dateLastUpdated='" + getDateLastUpdated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastUpdatedBy='" + getLastUpdatedBy() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", totalResponseCount=" + getTotalResponseCount() +
             "}";
     }
 }

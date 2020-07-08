@@ -19,7 +19,8 @@
       "text": "Text",
       "type": "Type",
       "jsonData": "Json Data",
-      "userResponse": "User Response",
+      "totalResponseCount": "Total Response Count",
+      "answer": "Answer",
       "survey": "Survey"
     }
   }

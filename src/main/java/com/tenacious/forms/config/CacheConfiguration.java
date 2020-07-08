@@ -56,6 +56,9 @@ public class CacheConfiguration {
             createCache(cm, com.tenacious.forms.domain.Question.class.getName());
             createCache(cm, com.tenacious.forms.domain.Question.class.getName() + ".userResponses");
             createCache(cm, com.tenacious.forms.domain.UserResponse.class.getName());
+            createCache(cm, com.tenacious.forms.domain.Survey.class.getName() + ".answers");
+            createCache(cm, com.tenacious.forms.domain.Question.class.getName() + ".answers");
+            createCache(cm, com.tenacious.forms.domain.Answer.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

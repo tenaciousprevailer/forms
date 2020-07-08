@@ -23,6 +23,7 @@ export class QuestionUpdateComponent implements OnInit {
     text: [],
     type: [],
     jsonData: [],
+    totalResponseCount: [],
     surveyId: [],
   });
 
@@ -47,6 +48,7 @@ export class QuestionUpdateComponent implements OnInit {
       text: question.text,
       type: question.type,
       jsonData: question.jsonData,
+      totalResponseCount: question.totalResponseCount,
       surveyId: question.surveyId,
     });
   }
@@ -72,6 +74,7 @@ export class QuestionUpdateComponent implements OnInit {
       text: this.editForm.get(['text'])!.value,
       type: this.editForm.get(['type'])!.value,
       jsonData: this.editForm.get(['jsonData'])!.value,
+      totalResponseCount: this.editForm.get(['totalResponseCount'])!.value,
       surveyId: this.editForm.get(['surveyId'])!.value,
     };
   }

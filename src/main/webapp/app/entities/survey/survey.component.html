@@ -31,7 +31,7 @@
                     <th scope="col"  jhiSortBy="dateLastUpdated"><span jhiTranslate="formsApp.survey.dateLastUpdated">Date Last Updated</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="formsApp.survey.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="lastUpdatedBy"><span jhiTranslate="formsApp.survey.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="formsApp.survey.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="totalResponseCount"><span jhiTranslate="formsApp.survey.totalResponseCount">Total Response Count</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                     <td>{{ survey.dateLastUpdated | date:'medium' }}</td>
                     <td>{{ survey.createdBy }}</td>
                     <td>{{ survey.lastUpdatedBy }}</td>
-                    <td jhiTranslate="{{ 'formsApp.SurveyStatus.' + survey.status }}">{{ survey.status }}</td>
+                    <td>{{ survey.totalResponseCount }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

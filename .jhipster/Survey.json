@@ -34,9 +34,8 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "status",
-      "fieldType": "SurveyStatus",
-      "fieldValues": "DRAFT,PUBLISHED,EXPIRED"
+      "fieldName": "totalResponseCount",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [
@@ -48,23 +47,9 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "userResponse",
+      "otherEntityName": "answer",
       "otherEntityRelationshipName": "survey",
-      "relationshipName": "userResponse"
-    },
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "surveyConfiguration",
-      "otherEntityRelationshipName": "survey",
-      "relationshipName": "surveyConfiguration",
-      "ownerSide": false
-    },
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "surveyStats",
-      "otherEntityRelationshipName": "survey",
-      "relationshipName": "surveyStats",
-      "ownerSide": false
+      "relationshipName": "answer"
     }
   ],
   "changelogDate": "20200704190911",

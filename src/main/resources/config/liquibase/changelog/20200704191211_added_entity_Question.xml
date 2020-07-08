@@ -25,6 +25,9 @@
             <column name="json_data" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="total_response_count" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="survey_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -54,6 +57,7 @@
             <column name="text" type="string"/>
             <column name="type" type="string"/>
             <column name="json_data" type="string"/>
+            <column name="total_response_count" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

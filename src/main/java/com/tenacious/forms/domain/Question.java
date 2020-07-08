@@ -36,9 +36,12 @@ public class Question implements Serializable {
     @Column(name = "json_data")
     private String jsonData;
 
+    @Column(name = "total_response_count")
+    private Integer totalResponseCount;
+
     @OneToMany(mappedBy = "question")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<UserResponse> userResponses = new HashSet<>();
+    private Set<Answer> answers = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "questions", allowSetters = true)
@@ -92,29 +95,42 @@ public class Question implements Serializable {
         this.jsonData = jsonData;
     }
 
-    public Set<UserResponse> getUserResponses() {
-        return userResponses;
+    public Integer getTotalResponseCount() {
+        return totalResponseCount;
     }
 
-    public Question userResponses(Set<UserResponse> userResponses) {
-        this.userResponses = userResponses;
+    public Question totalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
         return this;
     }
 
-    public Question addUserResponse(UserResponse userResponse) {
-        this.userResponses.add(userResponse);
-        userResponse.setQuestion(this);
+    public void setTotalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public Question answers(Set<Answer> answers) {
+        this.answers = answers;
         return this;
     }
 
-    public Question removeUserResponse(UserResponse userResponse) {
-        this.userResponses.remove(userResponse);
-        userResponse.setQuestion(null);
+    public Question addAnswer(Answer answer) {
+        this.answers.add(answer);
+        answer.setQuestion(this);
         return this;
     }
 
-    public void setUserResponses(Set<UserResponse> userResponses) {
-        this.userResponses = userResponses;
+    public Question removeAnswer(Answer answer) {
+        this.answers.remove(answer);
+        answer.setQuestion(null);
+        return this;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
     }
 
     public Survey getSurvey() {
@@ -155,6 +171,7 @@ public class Question implements Serializable {
             ", text='" + getText() + "'" +
             ", type='" + getType() + "'" +
             ", jsonData='" + getJsonData() + "'" +
+            ", totalResponseCount=" + getTotalResponseCount() +
             "}";
     }
 }

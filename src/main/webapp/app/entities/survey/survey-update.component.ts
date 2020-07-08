@@ -27,7 +27,7 @@ export class SurveyUpdateComponent implements OnInit {
     dateLastUpdated: [],
     createdBy: [],
     lastUpdatedBy: [],
-    status: [],
+    totalResponseCount: [],
   });
 
   constructor(protected surveyService: SurveyService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -57,7 +57,7 @@ export class SurveyUpdateComponent implements OnInit {
       dateLastUpdated: survey.dateLastUpdated ? survey.dateLastUpdated.format(DATE_TIME_FORMAT) : null,
       createdBy: survey.createdBy,
       lastUpdatedBy: survey.lastUpdatedBy,
-      status: survey.status,
+      totalResponseCount: survey.totalResponseCount,
     });
   }
 
@@ -91,7 +91,7 @@ export class SurveyUpdateComponent implements OnInit {
         : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
-      status: this.editForm.get(['status'])!.value,
+      totalResponseCount: this.editForm.get(['totalResponseCount'])!.value,
     };
   }
 

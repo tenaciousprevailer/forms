@@ -16,6 +16,8 @@ public class QuestionDTO implements Serializable {
 
     private String jsonData;
 
+    private Integer totalResponseCount;
+
 
     private Long surveyId;
     
@@ -51,6 +53,14 @@ public class QuestionDTO implements Serializable {
         this.jsonData = jsonData;
     }
 
+    public Integer getTotalResponseCount() {
+        return totalResponseCount;
+    }
+
+    public void setTotalResponseCount(Integer totalResponseCount) {
+        this.totalResponseCount = totalResponseCount;
+    }
+
     public Long getSurveyId() {
         return surveyId;
     }
@@ -84,6 +94,7 @@ public class QuestionDTO implements Serializable {
             ", text='" + getText() + "'" +
             ", type='" + getType() + "'" +
             ", jsonData='" + getJsonData() + "'" +
+            ", totalResponseCount=" + getTotalResponseCount() +
             ", surveyId=" + getSurveyId() +
             "}";
     }

@@ -15,10 +15,8 @@ public interface SurveyMapper extends EntityMapper<SurveyDTO, Survey> {
 
     @Mapping(target = "questions", ignore = true)
     @Mapping(target = "removeQuestion", ignore = true)
-    @Mapping(target = "userResponses", ignore = true)
-    @Mapping(target = "removeUserResponse", ignore = true)
-    @Mapping(target = "surveyConfiguration", ignore = true)
-    @Mapping(target = "surveyStats", ignore = true)
+    @Mapping(target = "answers", ignore = true)
+    @Mapping(target = "removeAnswer", ignore = true)
     Survey toEntity(SurveyDTO surveyDTO);
 
     default Survey fromId(Long id) {

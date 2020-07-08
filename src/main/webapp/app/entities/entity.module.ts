@@ -24,6 +24,10 @@ import { RouterModule } from '@angular/router';
         path: 'user-response',
         loadChildren: () => import('./user-response/user-response.module').then(m => m.FormsUserResponseModule),
       },
+      {
+        path: 'answer',
+        loadChildren: () => import('./answer/answer.module').then(m => m.FormsAnswerModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

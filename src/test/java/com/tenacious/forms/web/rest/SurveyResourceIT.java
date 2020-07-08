@@ -26,7 +26,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.tenacious.forms.domain.enumeration.SurveyStatus;
 /**
  * Integration tests for the {@link SurveyResource} REST controller.
  */
@@ -59,8 +58,8 @@ public class SurveyResourceIT {
     private static final String DEFAULT_LAST_UPDATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_UPDATED_BY = "BBBBBBBBBB";
 
-    private static final SurveyStatus DEFAULT_STATUS = SurveyStatus.DRAFT;
-    private static final SurveyStatus UPDATED_STATUS = SurveyStatus.PUBLISHED;
+    private static final Integer DEFAULT_TOTAL_RESPONSE_COUNT = 1;
+    private static final Integer UPDATED_TOTAL_RESPONSE_COUNT = 2;
 
     @Autowired
     private SurveyRepository surveyRepository;
@@ -95,7 +94,7 @@ public class SurveyResourceIT {
             .dateLastUpdated(DEFAULT_DATE_LAST_UPDATED)
             .createdBy(DEFAULT_CREATED_BY)
             .lastUpdatedBy(DEFAULT_LAST_UPDATED_BY)
-            .status(DEFAULT_STATUS);
+            .totalResponseCount(DEFAULT_TOTAL_RESPONSE_COUNT);
         return survey;
     }
     /**
@@ -114,7 +113,7 @@ public class SurveyResourceIT {
             .dateLastUpdated(UPDATED_DATE_LAST_UPDATED)
             .createdBy(UPDATED_CREATED_BY)
             .lastUpdatedBy(UPDATED_LAST_UPDATED_BY)
-            .status(UPDATED_STATUS);
+            .totalResponseCount(UPDATED_TOTAL_RESPONSE_COUNT);
         return survey;
     }
 
@@ -146,7 +145,7 @@ public class SurveyResourceIT {
         assertThat(testSurvey.getDateLastUpdated()).isEqualTo(DEFAULT_DATE_LAST_UPDATED);
         assertThat(testSurvey.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testSurvey.getLastUpdatedBy()).isEqualTo(DEFAULT_LAST_UPDATED_BY);
-        assertThat(testSurvey.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testSurvey.getTotalResponseCount()).isEqualTo(DEFAULT_TOTAL_RESPONSE_COUNT);
     }
 
     @Test
@@ -189,7 +188,7 @@ public class SurveyResourceIT {
             .andExpect(jsonPath("$.[*].dateLastUpdated").value(hasItem(DEFAULT_DATE_LAST_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].lastUpdatedBy").value(hasItem(DEFAULT_LAST_UPDATED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].totalResponseCount").value(hasItem(DEFAULT_TOTAL_RESPONSE_COUNT)));
     }
     
     @Test
@@ -211,7 +210,7 @@ public class SurveyResourceIT {
             .andExpect(jsonPath("$.dateLastUpdated").value(DEFAULT_DATE_LAST_UPDATED.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.lastUpdatedBy").value(DEFAULT_LAST_UPDATED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.totalResponseCount").value(DEFAULT_TOTAL_RESPONSE_COUNT));
     }
     @Test
     @Transactional
@@ -242,7 +241,7 @@ public class SurveyResourceIT {
             .dateLastUpdated(UPDATED_DATE_LAST_UPDATED)
             .createdBy(UPDATED_CREATED_BY)
             .lastUpdatedBy(UPDATED_LAST_UPDATED_BY)
-            .status(UPDATED_STATUS);
+            .totalResponseCount(UPDATED_TOTAL_RESPONSE_COUNT);
         SurveyDTO surveyDTO = surveyMapper.toDto(updatedSurvey);
 
         restSurveyMockMvc.perform(put("/api/surveys")
@@ -262,7 +261,7 @@ public class SurveyResourceIT {
         assertThat(testSurvey.getDateLastUpdated()).isEqualTo(UPDATED_DATE_LAST_UPDATED);
         assertThat(testSurvey.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSurvey.getLastUpdatedBy()).isEqualTo(UPDATED_LAST_UPDATED_BY);
-        assertThat(testSurvey.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testSurvey.getTotalResponseCount()).isEqualTo(UPDATED_TOTAL_RESPONSE_COUNT);
     }
 
     @Test

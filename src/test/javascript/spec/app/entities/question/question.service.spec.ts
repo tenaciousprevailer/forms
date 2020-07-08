@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(QuestionService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Question(0, 'AAAAAAA', QuestionType.TEXT, 'AAAAAAA');
+      elemDefault = new Question(0, 'AAAAAAA', QuestionType.TEXT, 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -58,6 +58,7 @@ describe('Service Tests', () => {
             text: 'BBBBBB',
             type: 'BBBBBB',
             jsonData: 'BBBBBB',
+            totalResponseCount: 1,
           },
           elemDefault
         );
@@ -77,6 +78,7 @@ describe('Service Tests', () => {
             text: 'BBBBBB',
             type: 'BBBBBB',
             jsonData: 'BBBBBB',
+            totalResponseCount: 1,
           },
           elemDefault
         );

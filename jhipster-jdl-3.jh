@@ -27,47 +27,26 @@ entity Survey {
 	dateLastUpdated Instant,
 	createdBy String,
 	lastUpdatedBy String,
-	status SurveyStatus
-}
-
-entity SurveyConfiguration {
-	surveyVisibility VisibilityType,
-	usersHavingVisibility String,
-	groupsHavingVisibility String,
-
-	resultVisibility VisibilityType
-	usersHavingResultVisibility String,
-	groupsHavingResultVisibility String,
-
-	maintainerUsers String,
-	maintainerUserGroups String
-}
-
-entity SurveyStats {
-	totalResponseCount Integer,
+	totalResponseCount Integer
 }
 
 entity Question {
 	text String,
     type QuestionType,
-    jsonData String
+    jsonData String,
+	totalResponseCount Integer
 }
 	
-entity UserResponse {
+entity Answer {
 	dateCreated Instant
 	takenBy String
-	responseData String
-}
-
-relationship OneToOne {
-	SurveyConfiguration to Survey,
-    SurveyStats to Survey
+	answerData String
 }
 
 relationship OneToMany {
     Survey to Question,
-    Survey to UserResponse
-    Question to UserResponse
+    Survey to Answer
+    Question to Answer
 }
 
 dto * with mapstruct

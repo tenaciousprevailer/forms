@@ -1,7 +1,6 @@
 import { Moment } from 'moment';
 import { IQuestion } from 'app/shared/model/question.model';
-import { IUserResponse } from 'app/shared/model/user-response.model';
-import { SurveyStatus } from 'app/shared/model/enumerations/survey-status.model';
+import { IAnswer } from 'app/shared/model/answer.model';
 
 export interface ISurvey {
   id?: number;
@@ -13,11 +12,9 @@ export interface ISurvey {
   dateLastUpdated?: Moment;
   createdBy?: string;
   lastUpdatedBy?: string;
-  status?: SurveyStatus;
+  totalResponseCount?: number;
   questions?: IQuestion[];
-  userResponses?: IUserResponse[];
-  surveyConfigurationId?: number;
-  surveyStatsId?: number;
+  answers?: IAnswer[];
 }
 
 export class Survey implements ISurvey {
@@ -31,10 +28,8 @@ export class Survey implements ISurvey {
     public dateLastUpdated?: Moment,
     public createdBy?: string,
     public lastUpdatedBy?: string,
-    public status?: SurveyStatus,
+    public totalResponseCount?: number,
     public questions?: IQuestion[],
-    public userResponses?: IUserResponse[],
-    public surveyConfigurationId?: number,
-    public surveyStatsId?: number
+    public answers?: IAnswer[]
   ) {}
 }

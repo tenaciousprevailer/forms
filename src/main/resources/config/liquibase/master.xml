@@ -19,12 +19,14 @@
     <include file="config/liquibase/changelog/20200704191111_added_entity_SurveyStats.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191211_added_entity_Question.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191311_added_entity_UserResponse.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200708115453_added_entity_Answer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200704190911_added_entity_constraints_Survey.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191211_added_entity_constraints_Question.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191311_added_entity_constraints_UserResponse.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191011_added_entity_constraints_SurveyConfiguration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200704191111_added_entity_constraints_SurveyStats.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200708115453_added_entity_constraints_Answer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
